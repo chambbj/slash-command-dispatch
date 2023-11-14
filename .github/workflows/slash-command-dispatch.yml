@@ -33,7 +33,7 @@ jobs:
             [
               {
                 "command": "help",
-                "permission": "none",
+                "permission": "write",
                 "issue_type": "pull-request",
                 "repository": "PDAL/slash-command-dispatch-processor",
                 "event_type_suffix": "-pr-command"
