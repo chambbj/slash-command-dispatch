@@ -7,6 +7,7 @@ on:
 jobs:
   slashCommandDispatch:
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       # Checkout is necessary here due to referencing a local action.
       # It's also necessary when using the 'config-from-file' option.
@@ -20,7 +21,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           commands: |
             help
-          permission: write
           issue-type: pull-request
 
       # # Advanced JSON configuration
