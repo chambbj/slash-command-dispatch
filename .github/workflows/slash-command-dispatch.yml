@@ -13,32 +13,32 @@ jobs:
       # Otherwise, avoid using checkout to keep this workflow fast.
       # - uses: actions/checkout@v4
 
-      # # Basic configuration
-      # - name: Slash Command Dispatch
-      #   uses: ./
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     commands: |
-      #       render
-      #     permission: none
-      #     issue-type: issue
-
-      # Advanced JSON configuration
-      - name: Slash Command Dispatch (JSON)
-        id: scd
+      # Basic configuration
+      - name: Slash Command Dispatch
         uses: peter-evans/slash-command-dispatch@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          config: >
-            [
-              {
-                "command": "help",
-                "permission": "write",
-                "issue_type": "pull-request",
-                "repository": "chambbj/slash-command-dispatch-processor",
-                "event_type_suffix": "-pr-command"
-              }
-            ]
+          commands: |
+            help
+          permission: write
+          issue-type: pull-request
+
+      # # Advanced JSON configuration
+      # - name: Slash Command Dispatch (JSON)
+      #   id: scd
+      #   uses: peter-evans/slash-command-dispatch@v3
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     config: >
+      #       [
+      #         {
+      #           "command": "help",
+      #           "permission": "write",
+      #           "issue_type": "pull-request",
+      #           "repository": "chambbj/slash-command-dispatch-processor",
+      #           "event_type_suffix": "-pr-command"
+      #         }
+      #       ]
 
       - name: Edit comment with error message
         if: steps.scd.outputs.error-message
